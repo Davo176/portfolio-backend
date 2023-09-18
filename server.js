@@ -16,6 +16,6 @@ app.get("/", (req,res)=>{
     res.send("Hello World!");
 })
 
-app.listen(port, ()=>{
+app.listen(parseInt(process.env.PORT || '3999') , process.env.HOST || '0.0.0.0', ()=>{
     console.log(`Listening on port ${port}`);
 })
