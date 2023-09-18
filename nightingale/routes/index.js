@@ -1,64 +1,62 @@
+const express = require('express');
+
 const NightingaleRouter = express.Router();
 
-import { Configuration, OpenAIApi } from "openai";
-import { createClient } from "@supabase/supabase-js";
+const { OpenAI } = require("openai");
+const { createClient } = require("@supabase/supabase-js");
 
-export const supabase = createClient(process.env.SUPABASE_URL||'',process.env.SUPABASE_KEY||'')
+const supabase = createClient(process.env.SUPABASE_URL||'',process.env.SUPABASE_KEY||'')
 
-const configuration = new Configuration({ apiKey: process.env.OPENAI_KEY});
-const openAi = new OpenAIApi(configuration);
+const openAi = new OpenAI({ apiKey: process.env.OPENAI_KEY});
 
-async function fetchEmbedding(content) {
-    const embeddingResponse = await openAi.createEmbedding({
-        model: 'text-embedding-ada-002',
-        input: content,
-    })
-  
-    const [{embedding}] = embeddingResponse.data.data;
-  
-    return embedding;
+async function generateEmbeddings(content) {
+  const embeddingResponse = await openAi.embeddings.create({
+      input:content,
+      model:'text-embedding-ada-002',
+
+  })
+  const embedding = embeddingResponse.data[0].embedding
+  return embedding;
 }
 
 async function answerQuestion(question,information) {
     //work out how to handle multiple questions
-    const chatResponse = await openAi.createChatCompletion({
+    const chatResponse = await openAi.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role:'system',
-          content:"You exist on Will Davis's personal portfolio, and will talk to recruiters, justifying why they should hire Will, and explain how the site works."
+          content:"You are Will Davis's personal hype-man. Recruiters will ask you questions, Will will provide you with the information required to answer those questions. Don't be too over the top, but never downplay Will's abilities."
         },
         {
           role:'system',
-          content:`Each question someone asks, you will be provided with a question, and a set of information you are permitted to use to answer the question
-            If the question cannot be answered with that information, simply say "I am unable to answer that unfortunately"
+          content:`All questions asked will be about Will Davis, or his work and projects.
             Respond with only the answer to that message. You can use information received in different questions to answer new questions.
           `
         },
         {
           role:'user',
-          content:`Please answer this question: ${question}?
+          content:`Recruitors question: ${question}?
   
-          using only the following information:
-          ${information}
+          Information from Will: ${information}
           `
         },
       ],
       temperature:0,
     })
    
-    return chatResponse.data;
+    return chatResponse;
 }
 
 NightingaleRouter.post("/", async (req,res)=>{
     let input = req.body;
-    const x = await generateEmbeddings(input);
+    const x = await generateEmbeddings(input.content);
 
     const {data:documents} = await supabase.rpc('match_documents',{
         query_embedding:x,
         match_threshold:0.75,
         match_count:20,
-        c_id: 'Will',
+        c_id: 'a948d675-9afa-4cb9-b986-4c4ed7b68ca8',
     })
 
     let relevent_information=documents.map(doc=>doc.content).join(', ');
@@ -69,8 +67,6 @@ NightingaleRouter.post("/", async (req,res)=>{
     res.send(
         response.choices[0]?.message?.content
     )
-
-    ("Hello World!");
 })
 
-export {NightingaleRouter}
+module.exports = NightingaleRouter

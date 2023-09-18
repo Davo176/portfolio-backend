@@ -1,9 +1,13 @@
-import express from "express";
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
-import NightingaleRouter from "./nightingale/routes";
+const NightingaleRouter = require("./nightingale/routes");
 
 const app = express();
+app.use(express.json())
+app.use(cors());
+
 const port = 8080;
 
 app.use('/nightingale',NightingaleRouter);
