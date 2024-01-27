@@ -3,7 +3,7 @@ import OpenAI from "openai";
 
 const NightingaleRouter = express.Router();
 
-const openAi = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+// const openAi = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 
 // async function generateEmbeddings(content: string) {
 //   const embeddingResponse = await openAi.embeddings.create({
