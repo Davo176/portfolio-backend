@@ -1,10 +1,12 @@
-require("dotenv").config();
+import dotenv from "dotenv";
 import { NightingaleRouter } from "./nightingale/routes";
 import express from "express";
 import cors from "cors";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
