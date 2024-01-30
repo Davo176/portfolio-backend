@@ -38,7 +38,7 @@ async function answerQuestion(question: string, information: string) {
         content: `Recruitors question: ${question}? Information from Will: ${information}`,
       },
     ],
-    temperature: 0.1,
+    temperature: 0.3,
   });
 
   return chatResponse;
