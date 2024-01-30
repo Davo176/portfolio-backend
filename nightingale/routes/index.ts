@@ -61,7 +61,7 @@ NightingaleRouter.post("/answer", async (req, res) => {
     }) as similarity
   from embeddings
   order by similarity desc
-  limit 2;
+  limit 3;
   `;
 
   let documents = await db.execute(query);
