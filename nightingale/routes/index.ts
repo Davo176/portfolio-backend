@@ -81,7 +81,7 @@ NightingaleRouter.post("/answer", async (req, res) => {
 });
 
 NightingaleRouter.get("/content", async (req, res) => {
-  res.send(db.select().from(embeddings.table));
+  res.send(await db.select().from(embeddings.table));
 });
 
 NightingaleRouter.post("/content", async (req, res) => {
