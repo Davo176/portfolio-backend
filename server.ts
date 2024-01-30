@@ -10,7 +10,14 @@ import { z } from "zod";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://w-davis.com"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Enable credentials (cookies, authorization headers) for cross-origin requests
+  optionsSuccessStatus: 204, // Set the response status for successful preflight requests
+};
+
+app.use(cors(corsOptions));
 
 const migrationClient = postgres(process.env.DATABASE_URL || "", { max: 1 });
 migrate(drizzle(migrationClient), { migrationsFolder: "./drizzle" });
