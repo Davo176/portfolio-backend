@@ -16,9 +16,6 @@ const corsOptions = {
     "https://w-davis.com",
     "http://127.0.0.1:5173/",
   ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Enable credentials (cookies, authorization headers) for cross-origin requests
-  optionsSuccessStatus: 204, // Set the response status for successful preflight requests
 };
 
 app.use(cors(corsOptions));
