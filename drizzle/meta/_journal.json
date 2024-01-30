@@ -8,6 +8,20 @@
       "when": 1706325748258,
       "tag": "0000_quiet_tinkerer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706605237401,
+      "tag": "0001_elite_captain_universe",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706606872392,
+      "tag": "0002_shiny_cable",
+      "breakpoints": true
     }
   ]
 }

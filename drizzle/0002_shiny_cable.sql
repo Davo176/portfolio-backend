@@ -1,0 +1,1 @@
+ALTER TABLE "embeddings" ALTER COLUMN "embedding" SET NOT NULL;

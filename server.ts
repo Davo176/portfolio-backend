@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
+dotenv.config();
 import { NightingaleRouter } from "./nightingale/routes";
 import express from "express";
 import cors from "cors";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
-
-dotenv.config();
+import { z } from "zod";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +15,19 @@ app.use(cors());
 const migrationClient = postgres(process.env.DATABASE_URL || "", { max: 1 });
 migrate(drizzle(migrationClient), { migrationsFolder: "./drizzle" });
 
-const port = 8080;
+const port = process.env.port;
+app.use("/", (req, res, next) => {
+  const schema = z.string();
+  try {
+    schema.parse(req.headers["x-wd-api-key"]);
+    if (req.headers["x-wd-api-key"] !== process.env.API_KEY) {
+      res.status(403).send("Unauthorised");
+    }
+    next();
+  } catch {
+    res.status(403).send("Missing API Key");
+  }
+});
 
 app.use("/nightingale", NightingaleRouter);
 
