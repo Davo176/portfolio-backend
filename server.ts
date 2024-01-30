@@ -11,7 +11,11 @@ import { z } from "zod";
 const app = express();
 app.use(express.json());
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://w-davis.com"],
+  origin: [
+    "http://localhost:5173",
+    "https://w-davis.com",
+    "http://127.0.0.1:5173/",
+  ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Enable credentials (cookies, authorization headers) for cross-origin requests
   optionsSuccessStatus: 204, // Set the response status for successful preflight requests
