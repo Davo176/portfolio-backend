@@ -1,0 +1,1 @@
+ALTER TABLE "embeddings" ADD COLUMN "archived" boolean DEFAULT false NOT NULL;
