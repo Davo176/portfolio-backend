@@ -3,7 +3,7 @@ import OpenAI from "openai";
 import * as embeddings from "../../db/schema/embeddings";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { z } from "zod";
 
 const NightingaleRouter = express.Router();
@@ -60,6 +60,7 @@ NightingaleRouter.post("/answer", async (req, res) => {
       "[" + queryEmbedding.join(",") + "]"
     }) as similarity
   from embeddings
+  where archived is false
   order by similarity desc
   limit 3;
   `;
@@ -113,7 +114,23 @@ NightingaleRouter.post("/content", async (req, res) => {
       res.status(500);
     }
   } catch {
-    res.status(500).send("no content");
+    res.status(400).send("no content");
+  }
+});
+
+NightingaleRouter.delete("/content", async (req, res) => {
+  let input = req.body;
+  const id = input.id;
+  const schema = z.string().uuid();
+  try {
+    schema.parse(id);
+    await db
+      .update(embeddings.table)
+      .set({ archived: true })
+      .where(eq(embeddings.table.id, id));
+    res.status(200).send("Deleted");
+  } catch {
+    res.status(400).send("no id");
   }
 });
 
