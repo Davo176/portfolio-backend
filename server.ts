@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { NightingaleRouter } from "./nightingale/routes";
 import express from "express";
 import cors from "cors";
@@ -41,6 +43,21 @@ app.use("/nightingale", NightingaleRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+app.post("/login", (req, res) => {
+  const { password } = req.body;
+  const hash = process.env.PASSWORD_HASH as string;
+
+  if (!bcrypt.compareSync(password, hash)) {
+    res.send(401).json({ message: "Invalid Password" });
+  }
+  const token = jwt.sign(
+    { user: "will_davis" },
+    `${process.env.JWT_SIGNING_KEY}`,
+    { expiresIn: "1h" }
+  );
+  res.send({ token });
 });
 
 app.listen(

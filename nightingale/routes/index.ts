@@ -1,4 +1,7 @@
 import express from "express";
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import OpenAI from "openai";
 import * as embeddings from "../../db/schema/embeddings";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -81,7 +84,23 @@ NightingaleRouter.post("/answer", async (req, res) => {
   });
 });
 
-NightingaleRouter.get("/content", async (req, res) => {
+const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401); // No token provided
+
+  jwt.verify(
+    token,
+    `${process.env.JWT_SIGNING_KEY}`,
+    { maxAge: "1h" },
+    (err) => {
+      if (err) return res.sendStatus(403); // Invalid token
+      next();
+    }
+  );
+};
+
+NightingaleRouter.get("/content", authenticateToken, async (req, res) => {
   res.send(
     await db
       .select()
@@ -90,7 +109,7 @@ NightingaleRouter.get("/content", async (req, res) => {
   );
 });
 
-NightingaleRouter.post("/content", async (req, res) => {
+NightingaleRouter.post("/content", authenticateToken, async (req, res) => {
   let input = req.body;
   try {
     const schema = z.string();
@@ -123,7 +142,7 @@ NightingaleRouter.post("/content", async (req, res) => {
   }
 });
 
-NightingaleRouter.delete("/content", async (req, res) => {
+NightingaleRouter.delete("/content", authenticateToken, async (req, res) => {
   let input = req.body;
   const id = input.id;
   const schema = z.string().uuid();
