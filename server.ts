@@ -51,6 +51,31 @@ app.get("/s/:shortCode", async (req, res) => {
   }
 });
 
+app.get("/rah-laryngectomy", (req, res) => {
+  res.send(`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Hello, world!</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <meta name="description" content="" />
+      <link rel="icon" href="favicon.png">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body style="display:flex; font-family: 'Roboto', sans-serif; gap:16px;flex-direction: column; align-items:center;background-color:#ADD9F4;color:black; text-align: center;">
+      <h1>Laryngectomy - Support, Resources, FAQs</h1>
+
+      <div style="display: flex; gap: 8px; flex-direction: column; justify-content: space-around; padding: 20px 40px;">
+        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Larykins - Support Group for Post-Laryngectomy</div>
+        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Head and Neck Cancer Australia - FAQs and Care</div>
+        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">NSW Health - Going Home with a Laryngectomy Stoma</div>
+      </div>
+    </body>
+    </html>`);
+});
+
 app.use("/", (req, res, next) => {
   const schema = z.string();
   try {

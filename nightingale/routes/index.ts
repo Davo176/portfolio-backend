@@ -14,10 +14,15 @@ const NightingaleRouter = express.Router();
 const openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 async function generateEmbedding(content: string) {
-  const embeddingResponse = await openAi.embeddings.create({
-    input: content,
-    model: "text-embedding-ada-002",
-  });
+  const embeddingResponse = await openAi.embeddings
+    .create({
+      input: content,
+      model: "text-embedding-ada-002",
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error();
+    });
   const embedding = embeddingResponse.data[0].embedding;
   return embedding;
 }
