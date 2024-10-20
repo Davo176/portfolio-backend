@@ -56,7 +56,7 @@ app.get("/rah-laryngectomy", (req, res) => {
     <html lang="en">
     <head>
       <meta charset="UTF-8" />
-      <title>Hello, world!</title>
+      <title>RAH Laryngectomy</title>
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <meta name="description" content="" />
       <link rel="icon" href="favicon.png">
@@ -68,10 +68,9 @@ app.get("/rah-laryngectomy", (req, res) => {
       <h1>Laryngectomy - Support, Resources, FAQs</h1>
 
       <div style="display: flex; gap: 8px; flex-direction: column; justify-content: space-around; padding: 20px 40px;">
-        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Larykins - Support Group for Post-Laryngectomy</div>
-        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Head and Neck Cancer Australia - FAQs and Care</div>
-        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">NSW Health - Going Home with a Laryngectomy Stoma</div>
-      
+        <div onclick="window.location='https://larykins.com.au/'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Larykins - Support Group for Post-Laryngectomy</div>
+        <div onclick="window.location='https://www.headandneckcancer.org.au/types-of-head-neck-cancer/laryngeal-cancer/laryngectomy/'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Head and Neck Cancer Australia - FAQs and Care</div>
+        <div onclick="window.location='https://www.swslhd.health.nsw.gov.au/cancer/pdf/goinghome.pdf'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">NSW Health - Going Home with a Laryngectomy Stoma</div>
         </div>
     </body>
     </html>`);
