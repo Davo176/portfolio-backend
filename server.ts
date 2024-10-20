@@ -68,10 +68,11 @@ app.get("/rah-laryngectomy", (req, res) => {
       <h1>Laryngectomy - Support, Resources, FAQs</h1>
 
       <div style="display: flex; gap: 8px; flex-direction: column; justify-content: space-around; padding: 20px 40px;">
-        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Larykins - Support Group for Post-Laryngectomy</div>
-        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Head and Neck Cancer Australia - FAQs and Care</div>
-        <div style="flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">NSW Health - Going Home with a Laryngectomy Stoma</div>
-      </div>
+        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Larykins - Support Group for Post-Laryngectomy</div>
+        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">Head and Neck Cancer Australia - FAQs and Care</div>
+        <div onclick="window.location='https://www.google.com'" style="cursor:pointer;flex: 1;text-align: center; justify-content: center; align-items: center; color:white; border-radius: 8px; background-color: #476C9B; margin: 0 10px; padding: 10px 30px;">NSW Health - Going Home with a Laryngectomy Stoma</div>
+      
+        </div>
     </body>
     </html>`);
 });
