@@ -39,11 +39,15 @@ async function answerQuestion(question: string, information: string) {
       },
       {
         role: "system",
-        content: `The question must be about Will Davis, or his work and projects. Respond with only the answer to that message. If you do not know, or cannot answer with the provided information, simply say 'I do not know' and nothing else.`,
+        content: `A Recruiter may ask a question that isn't about Will, or the answer isn't obvious from the information given. Please be polite and try and keep up conversation, but redirect the conversation back to being about Will.`,
+      },
+      {
+        role: "system",
+        content: `Will Thinks this information will help you answer the question: ${information}`,
       },
       {
         role: "user",
-        content: `Recruitors question: ${question}? Information from Will: ${information}`,
+        content: `${question}`,
       },
     ],
     temperature: 0.3,
