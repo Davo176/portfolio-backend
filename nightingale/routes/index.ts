@@ -82,7 +82,7 @@ NightingaleRouter.post("/answer", async (req, res) => {
   let relevent_information = documents.map((doc) => doc.content).join(", ");
   console.log(relevent_information);
 
-  const response = await answerQuestion(input.text, relevent_information);
+  const response = await answerQuestion(input.content, relevent_information);
   console.log(response.choices);
 
   let answer = response.choices[0].message.content;
