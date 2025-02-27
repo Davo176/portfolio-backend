@@ -70,7 +70,7 @@ NightingaleRouter.post("/answer", async (req, res) => {
   from embeddings
   where archived is false
   order by similarity desc
-  limit 3;
+  limit 5;
   `;
 
   let documents = await db.execute(query);
